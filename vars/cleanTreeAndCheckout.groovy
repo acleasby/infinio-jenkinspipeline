@@ -27,7 +27,11 @@ def call(Map args, Closure body) {
         stage("Checkout code") {
             if (localRepo != null) {
                 echo "Cleaning tree, excluding local repo ${localRepo}"
-                sh "git clean -fdx -e ${localRepo} ${excludeArg} || /bin/true"
+                if (isUnix()) {
+                    sh "git clean -fdx -e ${localRepo} ${excludeArg} || /bin/true"
+                } else {
+                    bat "git clean -fdx -e ${localRepo} ${excludeArg} || exit 0;"
+                }
             }
             checkout poll: false, scm: [
                     $class           : 'GitSCM',
