@@ -13,7 +13,7 @@ def call(Map args, Closure body) {
 
     sonarProject = sonarProject.isEmpty() ? "master" : sonarProject
 
-    stage('Deploy console') {
+    stage('Deploy or find console') {
 
         if (!useExistingConsole) {
             withEnv(["AUTO_PARAMETERS=managementvm.console_name=${consoleName},${testbedName}"]) {
@@ -23,6 +23,7 @@ def call(Map args, Closure body) {
             ManagementVm.py deploy
             """
             }
+            env.consoleName = consoleName
         } else {
             withEnv(["AUTO_PARAMETERS=${testbedName}"]) {
                 def consoleNames = sh(returnStdout: true, script: '''#!/bin/bash
@@ -30,7 +31,11 @@ def call(Map args, Closure body) {
                     ManagementVm.py find
             ''').trim()
                 echo "Found consoles: $consoleNames"
-                consoleName = (consoleNames =~ /[^\(]*\(([^\)]*).*/)[0][1]
+                (consoleNames =~ /[^\(]*\(([^\)]*).*/)
+                if (consoleNames[0].length == 0) {
+                    throw new IllegalStateException("Did not find any consoles")
+                }
+                env.consoleName = consoleNames[0][1]
             }
             echo "Using existing console: ${consoleName}"
         }
