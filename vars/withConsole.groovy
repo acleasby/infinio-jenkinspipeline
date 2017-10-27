@@ -32,7 +32,7 @@ def call(Map args, Closure body) {
             ''').trim()
                 echo "Found consoles: $consoleNames"
                 (consoleNames =~ /[^\(]*\(([^\)]*).*/)
-                if (consoleNames[0].length == 0) {
+                if (consoleNames.length == 0 || consoleNames[0].length == 0) {
                     throw new IllegalStateException("Did not find any consoles")
                 }
                 env.consoleName = consoleNames[0][1]
