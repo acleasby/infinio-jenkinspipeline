@@ -31,7 +31,8 @@ def call(Map args, Closure body) {
                     ManagementVm.py find
             ''').trim()
                 echo "Found consoles: $consoleNames"
-                (consoleNames =~ /[^\(]*\(([^\)]*).*/)
+                consoleNames =~ /[^\(]*\(([^\)]*).*/
+                echo "$consoleNames"
                 if (consoleNames.length == 0 || consoleNames[0].length == 0) {
                     throw new IllegalStateException("Did not find any consoles")
                 }
