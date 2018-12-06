@@ -1,12 +1,12 @@
 /**
  * Sets BUILD_IDENT if not already set, also sets Jenkins build name and description.
- * @param body
  * @return
  */
-def call(body) {
-    String buildIdent = binding.variables['BUILD_IDENT'] ?: ""
-    String gitBranch = binding.variables['GIT_BRANCH'] ?: "master"
-    String testSuite = binding.variables['testSuite'] ?: null
+def call() {
+    echo "Variables: ${env}"
+    String buildIdent = env['BUILD_IDENT'] ?: ""
+    String gitBranch = env['GIT_BRANCH'] ?: "master"
+    String testSuite = env['testSuite'] ?: null
 
     def buildNumber = currentBuild.number
 
