@@ -3,7 +3,6 @@
  * @return
  */
 def call() {
-    echo "Variables: ${env}"
     String buildIdent = env['BUILD_IDENT'] ?: ""
     String gitBranch = env['GIT_BRANCH'] ?: "master"
     String testSuite = env['testSuite'] ?: null

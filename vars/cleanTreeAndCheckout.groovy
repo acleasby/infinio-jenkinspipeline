@@ -35,6 +35,7 @@ def call(Map args, Closure body) {
             }
             checkout poll: false, scm: [
                     $class           : 'GitSCM',
+                    extensions       : [[$class: 'CloneOption', timeout: 240]],
                     branches         : [[name: "${gitBranch}"]],
                     userRemoteConfigs: [[
                                                 url          : "${url}",
