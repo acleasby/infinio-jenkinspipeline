@@ -15,9 +15,7 @@ def call() {
 
     env.BUILD_IDENT = buildIdent
 
-    String buildName = (buildIdent ==~ /.*dev.*/) ?
-            buildIdent :
-            "$buildIdent-$gitBranch.$buildNumber"
+    "#" + currentBuild.number + " " + "$buildIdent-$gitBranch"
     String buildDescription = "build #: $buildNumber, branch: ${gitBranch}" + (testSuite != null ? ", suite: $testSuite" : "")
 
     // Set Jenkins build name and description
