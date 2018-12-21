@@ -1,0 +1,1 @@
+Fully deletes a Nexus artifact, including all versions.

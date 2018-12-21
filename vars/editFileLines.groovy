@@ -13,6 +13,5 @@ def call(Map args) {
         sb.append(args.editFunction.call(line) + "\n")
     }
 
-    echo "Buffer: " + sb.toString()
     writeFile(file: args.containsKey("outputFile") ? args.outputFile : args.file, text: sb.toString())
 }

@@ -1,0 +1,1 @@
+Cleans a git directory and checks out code.  Optionally excludes directories from cleaning (e.g. Maven local repo).

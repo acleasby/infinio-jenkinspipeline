@@ -1,0 +1,1 @@
+Deploys a set of artifacts to Nexus using Maven.  Used to deploy artifacts and create correct metadata in Nexus.

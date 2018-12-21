@@ -1,6 +1,3 @@
-import java.io.*
-import java.util.*
-
 /**
  * Gets the current build properties from build.properties and returns a Properties object
  * @return
