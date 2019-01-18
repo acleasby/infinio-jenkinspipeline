@@ -10,7 +10,7 @@ def call() {
     def buildNumber = currentBuild.number
 
     if (buildIdent.isEmpty()) {
-        buildIdent = readFile(file: "RELEASENAME").trim() + ".dev";
+        buildIdent = readFile(file: "RELEASENAME").trim() + "-dev";
     }
 
     env.BUILD_IDENT = buildIdent
